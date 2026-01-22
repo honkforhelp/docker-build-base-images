@@ -16,20 +16,32 @@ FROM blakeisrael/heroku-ci-ruby-3.2.1-node
 
 ## Building an Image
 
+IF YOU ARE ON A MAC M1/M2/M3/M1000 you will first need to install docker buildx:
+
+`docker buildx install`
+
+### THEN:
+
 `cd` into the appropriate directory.
 
-Build the image and tag it (replace `dockerhubname` with your docker hub username or orgname):
+Build the image and tag it (replace `blakeisrael` with your docker hub username or orgname):
 
-`docker build . -t dockerhubname/${PWD##*/}`
+If you are on an Intel chip:
+
+`docker build . -t blakeisrael/${PWD##*/}`
+
+If you are on Apple Silicon:
+
+`docker buildx build --platform=linux/amd64 . -t blakeisrael/${PWD##*/}`
 
 `${PWD##*/}` will be replaced with the current directory name.
 
 Push it to docker:
 
-`docker push dockerhubname/${PWD##*/}`
+`docker push blakeisrael/${PWD##*/}`
 
-You can then `FROM dockerhubname/some-tag-name` in your own other Dockerfile OR
-you can use it as the base in your `bitbucket-pipelines.yml` with `image: dockerhubname/some-tag-name`.
+You can then `FROM blakeisrael/some-tag-name` in your own other Dockerfile OR
+you can use it as the base in your `bitbucket-pipelines.yml` with `image: blakeisrael/some-tag-name`.
 
 ## I just want to use it
 

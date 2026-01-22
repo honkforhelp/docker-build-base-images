@@ -132,6 +132,3 @@ RUN sudo apt-get install -y --no-install-recommends \
 
 # Except for the PG15 client which doesn't build right for me:
 ##     postgresql-client-15 \
-
-# This verion also has imagemagick headers:
-RUN sudo apt install --yes --fix-missing libmagickwand-dev
